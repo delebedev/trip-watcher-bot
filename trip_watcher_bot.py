@@ -16,7 +16,7 @@ ATOM_FEED_URLS = [
 ]
 
 MATCHES = [
-    "new york", "boston", "argentina", "chile", "buenos aires", "lima", "bogota", "santiago", "peru", "seoul", "korea"
+    "new york", "boston", "argentina", "chile", "buenos aires", "lima", "bogota", "santiago", "peru", "seoul", "korea", "tokyo", "japan",
 ]
 
 def send_message(channel, message):
