@@ -1,3 +1,4 @@
 trip-watch-env
 .env
 *.zip
+__pycache__

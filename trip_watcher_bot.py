@@ -1,7 +1,8 @@
 import os
 import requests
 import feedparser
-from datetime import timedelta, datetime
+import logging
+from datetime import timedelta, datetime, timezone
 from dateutil import parser
 from dotenv import load_dotenv
 from time import sleep
@@ -16,14 +17,19 @@ ATOM_FEED_URLS = [
 ]
 
 MATCHES = [
-    "new york", "boston", "argentina", "chile", "buenos aires", "lima", 
-    "bogota", "santiago", "peru", "seoul", "korea", "tokyo", "japan", "vietnam", "hanoi", "Bangkok"
+    "argentina", "bangkok", "bogota", "boston", "buenos aires", "chile",
+    "hanoi", "japan", "korea", "lima", "new york", "peru", "santiago",
+    "seoul", "thailand", "tokyo", "vietnam"
 ]
+
+# Set up basic configuration for logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def send_message(channel, message):
     response = requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={channel}&text={message}')
     
     if response.status_code != 200:
+        logging.error(f'Error sending message to channel {channel}: {response.status_code} - {response.json()}')
         print(f'Error sending message to channel {channel}: {response.status_code} - {response.json()}')
     
 
@@ -39,10 +45,11 @@ def parse_feed(feed_url):
         print("Processing entry: " + entry.title + " " + entry.published)
         parsed_date = parser.parse(entry.published)
         ## this feed is in UTC
-        parsed_date = (parsed_date).replace(tzinfo=None) # remove timezone offset to allow date math
+        parsed_date = parsed_date.astimezone(timezone.utc)
         ## parsed_date = (parsed_date + timedelta(hours=2)).replace(tzinfo=None) # remove timezone offset
-        now_date = datetime.utcnow()
+        now_date = datetime.now(timezone.utc)
         published_hour_ago = now_date - parsed_date < timedelta(minutes=60)
+        
         if published_hour_ago and match_destination(entry.title):
             send_message(TRIPS_CHANNEL_ID, entry.title + "\n" + parsed_date.strftime("%d/%m/%Y, %H:%M:%S") + "\n" + entry.link)
 
