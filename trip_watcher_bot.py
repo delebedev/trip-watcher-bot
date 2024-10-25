@@ -19,7 +19,8 @@ ATOM_FEED_URLS = [
 MATCHES = [
     "argentina", "bangkok", "bogota", "boston", "buenos aires", "chile",
     "hanoi", "japan", "korea", "lima", "new york", "peru", "santiago",
-    "seoul", "thailand", "tokyo", "vietnam"
+    "seoul", "thailand", "tokyo", "vietnam",
+    "myanmar", "cambodia" "laos", "malaysia", "singapore"
 ]
 
 # Set up basic configuration for logging
