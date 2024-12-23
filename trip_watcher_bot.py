@@ -17,13 +17,11 @@ ATOM_FEED_URLS = [
 ]
 
 MATCHES = [
-    "argentina", "bangkok", "bogota", "boston", "buenos aires", "chile",
-    "hanoi", "japan", "korea", "lima", "new york", "peru", "santiago",
-    "seoul", "thailand", "tokyo", "vietnam",
-    "myanmar", "cambodia" "laos", "malaysia", "singapore"
+    "argentina", "bogota", "buenos aires", "chile",
+    "hanoi", "japan", "korea", "lima", "peru", "santiago",
+    "seoul", "tokyo"
 ]
 
-# Set up basic configuration for logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def send_message(channel, message):
