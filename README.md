@@ -1,21 +1,24 @@
 ## Trip watcher bot
 
-Simple lambda that monitors a few airline deals RSS feeds for particular destinations.
+Stateless lambda that monitors a few airline deals RSS feeds for particular destinations.
 
-### Build
+### Build and run
+
+Setup the environment:
 
 ```bash
-python3 -m venv trip-watch-env
-source trip-watch-env/bin/activate
-pip install --target ./package requests feedparser python-dateutil python-dotenv
+cp example.env .env
 ```
 
-Edit example.env, then `mv example.env .env`
-
+```bash
+pipenv install
+pipenv shell
+python trip_watcher_bot.py
+```
 
 ### Deploy
 
-use your AWS lamda id :) 
+use your AWS lamda id :)
 
 ```bash
 ./deploy.sh

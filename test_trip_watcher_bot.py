@@ -47,10 +47,10 @@ class TestTripWatcherBot(unittest.TestCase):
         parse_feed("http://test-feed.com")
         mock_send_message.assert_called_once()
 
-        # Test with non-matching destination
         mock_entry.title = "Explore Paris"
         parse_feed("http://test-feed.com")
-        mock_send_message.assert_called_once()  # Should not be called again
+        # Should not be called again
+        mock_send_message.assert_called_once() 
 
 if __name__ == '__main__':
     unittest.main()
